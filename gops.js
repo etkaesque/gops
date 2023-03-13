@@ -43,10 +43,13 @@ function play(diamondsSuit, spadesSuit, clubsSuit) {
   let shuffledSuit = shuffleArray(diamondsSuit)
   console.log(` Diamond cards are ${shuffledSuit}`);
 
+  // inicial turn and hands
+
   let turn = 1;
   let player1Hand = spadesSuit;
   let player2Hand = clubsSuit;
 
+  // initial score
   let player1Score = 0;
   let player2Score = 0;
 
@@ -93,9 +96,11 @@ function play(diamondsSuit, spadesSuit, clubsSuit) {
     console.log(score)
 
 
-    // next turn
+    // next turn 
 
     turn++
+
+    // delete diamond card form screen
 
 
   });

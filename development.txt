@@ -1,0 +1,8 @@
+
+Deimantu kalade: 
+
+    done 1.Sukurti funkcija kuri shullfintu kortas ekrane. 
+    done 2. kortos turi eiti viena ant kitos 
+
+    3. sena korta turi pasišalinti ir atsidaryti turi atsidaryti nauja korta po kiekvieno turn.
+    // in play function: for each turn: take last card and delete it
