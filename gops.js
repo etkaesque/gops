@@ -2,7 +2,6 @@ let diamondsSuit = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
 let spadesSuit = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
 let clubsSuit = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
 
-
 // Fisher–Yates shuffle
 
 function shuffleArray(arr) {
@@ -14,7 +13,6 @@ function shuffleArray(arr) {
 }
 
 // player inputs his card
-
 function playerInput(player, hand) {
 
   console.log(`Player ${player}'s turn.`)
@@ -32,7 +30,6 @@ function playerInput(player, hand) {
 }
 
 // deletes card in a hand and returns new hand
-
 function deleteCard(hand, card) {
 
   let cardIndex = hand.indexOf(card)
@@ -41,14 +38,10 @@ function deleteCard(hand, card) {
 
 }
 
+function play(diamondsSuit, spadesSuit, clubsSuit) {
 
-
-
-let shuffledSuit = shuffleArray(diamondsSuit)
-
-console.log(` Diamond cards are ${shuffledSuit}`);
-
-function play(shuffledSuit, spadesSuit, clubsSuit) {
+  let shuffledSuit = shuffleArray(diamondsSuit)
+  console.log(` Diamond cards are ${shuffledSuit}`);
 
   let turn = 1;
   let player1Hand = spadesSuit;
@@ -77,26 +70,28 @@ function play(shuffledSuit, spadesSuit, clubsSuit) {
 
     // print who played what card to players
 
-    console.log(`Player one card: ${player1Card}`);
-    console.log(`Player one card: ${player2Card}`);
+    console.log(`Player one card: ${player1Card}. Player two card: ${player2Card}`);
+    
 
 
-    // count score for players
+    // count score for players if cards are the same then do not count the score
 
     if (player1Card > player2Card) {
 
       player1Score = player1Score + diamondCard
-  
-    } else {
-  
+
+    } else if (player1Card < player2Card) {
+
       player2Score = player2Score + diamondCard
-  
-    }
+
+    } else (
+      console.log("Cards are equal, nobody gets points")
+    )
 
     let score = `Player one score: ${player1Score}, player two score ${player2Score}`
 
     console.log(score)
-  
+
 
     // next turn
 
@@ -117,5 +112,5 @@ function play(shuffledSuit, spadesSuit, clubsSuit) {
 
 }
 
-play(shuffledSuit, spadesSuit, clubsSuit)
+play(diamondsSuit, spadesSuit, clubsSuit)
 
