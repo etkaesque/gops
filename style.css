@@ -80,6 +80,7 @@ body {
 }
 #playground .board .game-information .details {
   display: block;
+  color: white;
 }
 #playground .board .game-information #turn {
   margin: 12px;

@@ -43,34 +43,36 @@ function writeCard(cards, suit) {
 
 
     // add event listener for each card
-    let cardElement = document.querySelector(`#${suit}${card}`)
-    cardElement.addEventListener("click", () => teleport(cardElement, suit))
-    cardElement.addEventListener("click", () => sendNumber(suit, card))
-
-
+    addEvents(suit, card)
+   
 
   })
 
 }
 
 
+
+
 function addEvents(suit, card) {
 
+  let cardElement = document.querySelector(`#${suit}${card}`)
+  cardElement.addEventListener("click", () => teleport(cardElement, suit))
+  cardElement.addEventListener("click", () => sendNumber(suit, card))
+  
+
+}
+
+function removeEvents(suit, card) {
+
+  let cardElement = document.querySelector(`#${suit}${card}`)
+  cardElement.removeEventListener("click", () => teleport(cardElement, suit))
+  cardElement.removeEventListener("click", () => sendNumber(suit, card))
+
 
 
 }
 
-function removeEvents() {
-
-
-
-}
-
-// jeigu padedu korta, nuimti event listerius nuo visu likusiu, o kai pabaigiu rounda prideti is naujo
-
-
-
-
+// jeigu padedu korta, nuimti event listerius nuo visu likusiu padetos kortos suit, o kai pabaigiu rounda prideti is naujo visus listenerius
 
 
 
@@ -121,6 +123,8 @@ function teleport(cardElement, suit) {
 
   cardElement.remove()
   document.querySelector(`.battle-${suit}`).appendChild(cardElement);
+
+
 
 }
 
@@ -213,8 +217,8 @@ function countScore() {
   clubNumber = 0
   resetButton()
 
-  details.textContent = `TURN ${turnIndex} HAS ENDED: SPADE'S PLAYER SCORE IS ${spadeScore}, CLUB'S PLAYER SCORE IS ${clubScore}`
-  turnElement.textContent = `TURN: ${turnIndex}`
+  details.innerHTML = `SPADE'S PLAYER SCORE IS: ${spadeScore} <br> CLUB'S PLAYER SCORE IS: ${clubScore}`
+  turnElement.textContent = `RESULTS OF TURN: ${turnIndex}`
   deleteDiamond(diamond)
   clearBattle()
 
