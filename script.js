@@ -46,33 +46,54 @@ function writeCard(cards, suit) {
     let cardElement = document.querySelector(`#${suit}${card}`)
     cardElement.addEventListener("click", () => teleport(cardElement, suit))
     cardElement.addEventListener("click", () => sendNumber(suit, card))
-   
+
 
 
   })
 
 }
 
-let shuffledSuit = shuffleArray(diamondsSuit)
-writeDiamonds(shuffledSuit)
-writeCard(cardsArray, "spades")
-writeCard(cardsArray,"clubs")
 
+function addEvents(suit, card) {
 
-let spadeNumber = 0
-let clubNumber =  0
-
-
-function resetEvent() {
-
-  
-let button = document.querySelector("#turn")
-button.addEventListener('click', () => countScore())
 
 
 }
 
-resetEvent() 
+function removeEvents() {
+
+
+
+}
+
+// jeigu padedu korta, nuimti event listerius nuo visu likusiu, o kai pabaigiu rounda prideti is naujo
+
+
+
+
+
+
+
+let shuffledSuit = shuffleArray(diamondsSuit)
+writeDiamonds(shuffledSuit)
+writeCard(cardsArray, "spades")
+writeCard(cardsArray, "clubs")
+
+
+let spadeNumber = 0
+let clubNumber = 0
+
+
+function resetEvent() {
+
+
+  let button = document.querySelector("#turn")
+  button.addEventListener('click', () => countScore())
+
+
+}
+
+resetEvent()
 
 
 function resetButton() {
@@ -91,9 +112,11 @@ function teleport(cardElement, suit) {
 
 
   if (suit === "clubs") {
-    spadeBattle = cardElement} 
+    spadeBattle = cardElement
+  }
   else {
-    clubsBattle = cardElement}
+    clubsBattle = cardElement
+  }
 
 
   cardElement.remove()
@@ -110,35 +133,33 @@ function sendNumber(suit, card) {
 
 
   if (suit === "clubs") {
-    clubNumber = card} 
+    clubNumber = card
+  }
   else {
-    spadeNumber = card}
+    spadeNumber = card
+  }
 
   console.log(clubNumber)
   console.log(spadeNumber)
-  
 
-  endTurn(clubNumber,spadeNumber)
+
+  endTurn(clubNumber, spadeNumber)
 
 
 }
 
 
-// turim dabar tu skaicius, kai  spaidzia end turn mygtuka tada :
 
-// set up button 
-
-
-function endTurn(clubNumber,spadeNumber) {
+function endTurn(clubNumber, spadeNumber) {
 
   let button = document.querySelector("#turn")
-  
+
   if (clubNumber && spadeNumber !== 0) {
 
 
     console.log("Enabling button")
     button.removeAttribute("disabled")
-    
+
 
   } else {
 
@@ -146,12 +167,6 @@ function endTurn(clubNumber,spadeNumber) {
     button.setAttribute("disabled", "")
 
   }
-
-
-
-
-
-  // button.addEventListener('click', () => deleteBattle())
 
 
 }
@@ -165,7 +180,7 @@ let clubScore = 0;
 
 function countScore() {
 
-  let diamond = shuffledSuit[turnIndex-1]
+  let diamond = shuffledSuit[turnIndex - 1]
 
   let status = document.querySelector(".status")
   let details = document.querySelector(".details")
@@ -175,32 +190,34 @@ function countScore() {
   if (spadeNumber === clubNumber) {
 
     console.log("Tie")
-    status.textContent = "Tie"} 
+    status.textContent = "Tie"
+  }
 
   else if (spadeNumber < clubNumber) {
 
     console.log("Club is winner")
     clubScore += diamond
-    status.textContent = "Club player won this round" 
-  
-  } 
+    status.textContent = "Club player won this round"
 
-  else if (spadeNumber > clubNumber){
+  }
+
+  else if (spadeNumber > clubNumber) {
     console.log("Spade is winner")
     spadeScore += diamond
-    status.textContent = "Spade player won this round" 
-  
-    }
+    status.textContent = "Spade player won this round"
+
+  }
 
 
-  spadeNumber = 0 
+  spadeNumber = 0
   clubNumber = 0
   resetButton()
 
-  details.textContent = `TURN HAS ENDED: SPADE'S PLAYER SCORE IS ${spadeScore}, CLUB"S PLAYER SCORE IS ${clubScore}`
+  details.textContent = `TURN ${turnIndex} HAS ENDED: SPADE'S PLAYER SCORE IS ${spadeScore}, CLUB'S PLAYER SCORE IS ${clubScore}`
   turnElement.textContent = `TURN: ${turnIndex}`
-  deleteDiamond(diamond) 
-  clearBattle() 
+  deleteDiamond(diamond)
+  clearBattle()
+
   turnIndex += 1
 
 
@@ -224,3 +241,4 @@ function clearBattle() {
 
 
 }
+
