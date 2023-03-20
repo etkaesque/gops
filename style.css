@@ -1,8 +1,119 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0px;
+}
+
+.wrapper {
+  font-family: "Mulish", sans-serif;
+  width: 1230px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.wrapper header {
+  margin-bottom: 50px;
+  text-align: center;
+}
+.wrapper header h1 {
+  font-size: 2.5rem;
+  color: #E8E288;
+  font-weight: 700;
+  margin-bottom: 0px;
+}
+.wrapper header a {
+  font-size: 0.8rem;
+  color: #FF8360;
+  text-decoration: none;
+}
+
 #playground {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+#playground .board {
+  display: grid;
+  grid-template-columns: 300px 1fr 1fr;
+  grid-template-rows: 1fr;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+#playground .board #diamonds {
   background-color: rgba(255, 253, 253, 0.932) smoke;
 }
-#playground img {
+#playground .board #diamonds img {
   height: 300px;
   cursor: pointer;
   margin-right: -198px;
+}
+#playground .board .battle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+}
+#playground .board .battle .battle-spades img {
+  height: 300px;
+  position: absolute;
+}
+#playground .board .battle .battle-clubs img {
+  height: 300px;
+  position: absolute;
+}
+#playground .board .game-information {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#playground .board .game-information .status {
+  color: blueviolet;
+}
+#playground .board .game-information .turn-number {
+  font-weight: 700;
+  color: #E8E288;
+}
+#playground .board .game-information .details {
+  display: block;
+}
+#playground .board .game-information #turn {
+  margin: 12px;
+  border-radius: 20px;
+  padding: 10px 15px;
+  font-size: 0.75rem;
+  background-color: aliceblue;
+  border: none;
+  font-style: bold;
+  color: blueviolet;
+  font-weight: 700;
+  cursor: pointer;
+}
+#playground .board .game-information #turn:disabled {
+  background-color: lightgray;
+  color: rgba(165, 42, 42, 0.459);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+#playground #spades img {
+  height: 300px;
+  cursor: pointer;
+  margin-right: -130px;
+}
+#playground #spades img:hover {
+  position: relative;
+  bottom: 50px;
+}
+#playground #clubs {
+  height: 305px;
+}
+#playground #clubs img {
+  height: 300px;
+  cursor: pointer;
+  margin-right: -130px;
+}
+#playground #clubs img:hover {
+  position: relative;
+  top: 50px;
 }/*# sourceMappingURL=style.css.map */

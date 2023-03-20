@@ -5,22 +5,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Goofspiel</title>
+    <link rel="icon" href="club.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+    <div class="wrapper">
 
-    <main id="playground">
-
-    </main>
-
-
-
+        <header>
+            <h1>Goofspiel</h1>
+            <a target="_blank" href="http://www.catsatcards.com/Games/Goofspiel.html">Click me to learn rules!</a>
+        </header>
 
 
-    <script src="test.js"></script>
+        <main id="playground">
+            <div id="clubs"></div>
+            <div class="board">
+                <div id="diamonds"></div>
+                <div class="battle">
+                    <div class="battle-clubs">
+                    </div>
+                    <div class="battle-spades">
+                    </div>
+                </div>
+                <div class="game-information">
+                    <span class="turn-number">Turn 1</span>
+                    <h2 class="status">Choose your cards</h2>
+                    <span class="details"></span>
+                    <button id="turn">End Turn</button>
+                </div>
+            </div>
+            <div id="spades"></div>
+        </main>
+    </div>
+
+
+
+    <script src="script.js"></script>
 
 
 </body>
