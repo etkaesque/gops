@@ -1,8 +1,29 @@
-let diamondsSuit = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-let cardsArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+// game set-up
+
+const diamonds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+const cardsArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+const spades = "spades";
+const clubs = "clubs";
+
+let shuffledSuit = shuffleArray(diamonds);
+writeDiamonds(shuffledSuit);
+writeCards(cardsArray, spades);
+writeCards(cardsArray, clubs);
+
+let spadeNumber = 0;
+let clubNumber = 0;
+
+resetEvent();
+resetButton();
+
+let spadeBattle;
+let clubsBattle;
+let turnIndex = 1;
+let spadeScore = 0;
+let clubScore = 0;
 
 
-// Fisher–Yates shuffle
+// shuffle diamond suit
 
 function shuffleArray(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -11,6 +32,8 @@ function shuffleArray(arr) {
   }
   return arr;
 }
+
+// create cards in html
 
 function writeDiamonds(shuffledSuit) {
 
@@ -26,36 +49,34 @@ function writeDiamonds(shuffledSuit) {
 
 }
 
-function writeCard(cards, suit) {
-
+function writeCards(cards, suit) {
   cards.forEach(card => {
-
-
-
-    let cardImage = document.createElement('img')
-    cardImage.setAttribute("src", `cards/${suit}/${suit}${card}.svg`)
-    cardImage.setAttribute("id", `${suit}${card}`)
-    cardImage.setAttribute("value", `${card}`)
+    let cardImage = createCardImage(suit, card);
     document.getElementById(`${suit}`).appendChild(cardImage);
+    addCardEvents(suit, card);
+  });
+}
 
+// add atrributes
 
-    addEvents(suit, card)
+function createCardImage(suit, card) {
+  let cardImage = document.createElement('img');
+  cardImage.setAttribute("src", `cards/${suit}/${suit}${card}.svg`);
+  cardImage.setAttribute("id", `${suit}${card}`);
+  cardImage.setAttribute("value", `${card}`);
+  return cardImage;
+}
 
+// add events to card
 
-  })
-
+function addCardEvents(suit, card) {
+  let cardElement = document.querySelector(`#${suit}${card}`);
+  cardElement.addEventListener("click", () => teleport(cardElement, suit));
+  cardElement.addEventListener("click", () => sendNumber(suit, card));
 }
 
 
-function addEvents(suit, card) {
-
-  let cardElement = document.querySelector(`#${suit}${card}`)
-  cardElement.addEventListener("click", () => teleport(cardElement, suit))
-  cardElement.addEventListener("click", () => sendNumber(suit, card))
-
-}
-
-
+// manage clickability of cards 
 
 function disableCardClicks(suit) {
   cardsArray.forEach(card => {
@@ -75,6 +96,8 @@ function enableCardClicks(suit) {
   });
 }
 
+// move card to "battle area"
+
 function teleport(cardElement, suit) {
   if (suit === "clubs") {
     spadeBattle = cardElement;
@@ -88,6 +111,7 @@ function teleport(cardElement, suit) {
   document.querySelector(`.battle-${suit}`).appendChild(cardElement);
 }
 
+// remove cards in "battle area"
 
 function clearBattle() {
 
@@ -123,17 +147,6 @@ function sendNumber(suit, card) {
 }
 
 
-
-let shuffledSuit = shuffleArray(diamondsSuit)
-writeDiamonds(shuffledSuit)
-writeCard(cardsArray, "spades")
-writeCard(cardsArray, "clubs")
-
-
-let spadeNumber = 0
-let clubNumber = 0
-
-
 function resetEvent() {
 
 
@@ -143,20 +156,12 @@ function resetEvent() {
 
 }
 
-resetEvent()
-
 
 function resetButton() {
   let button = document.querySelector("#turn")
   button.setAttribute("disabled", "")
 
 }
-
-
-resetButton()
-
-let spadeBattle
-let clubsBattle
 
 
 function endTurn(clubNumber, spadeNumber) {
@@ -179,12 +184,6 @@ function endTurn(clubNumber, spadeNumber) {
 
 
 }
-
-
-let turnIndex = 1;
-let spadeScore = 0;
-let clubScore = 0;
-
 
 function countScore() {
 
