@@ -22,9 +22,7 @@ function writeDiamonds(shuffledSuit) {
     document.getElementById("diamonds").appendChild(cardImage);
 
 
-
   });
-
 
 }
 
@@ -33,7 +31,6 @@ function writeCard(cards, suit) {
   cards.forEach(card => {
 
 
-    // write cards into HTML
 
     let cardImage = document.createElement('img')
     cardImage.setAttribute("src", `cards/${suit}/${suit}${card}.svg`)
@@ -42,15 +39,12 @@ function writeCard(cards, suit) {
     document.getElementById(`${suit}`).appendChild(cardImage);
 
 
-    // add event listener for each card
     addEvents(suit, card)
-   
+
 
   })
 
 }
-
-
 
 
 function addEvents(suit, card) {
@@ -58,21 +52,75 @@ function addEvents(suit, card) {
   let cardElement = document.querySelector(`#${suit}${card}`)
   cardElement.addEventListener("click", () => teleport(cardElement, suit))
   cardElement.addEventListener("click", () => sendNumber(suit, card))
-  
 
 }
 
-function removeEvents(suit, card) {
 
-  let cardElement = document.querySelector(`#${suit}${card}`)
-  cardElement.removeEventListener("click", () => teleport(cardElement, suit))
-  cardElement.removeEventListener("click", () => sendNumber(suit, card))
 
+function disableCardClicks(suit) {
+  cardsArray.forEach(card => {
+    let cardElement = document.querySelector(`#${suit}${card}`);
+    if (cardElement) {
+      cardElement.style.pointerEvents = 'none';
+    }
+  });
+}
+
+function enableCardClicks(suit) {
+  cardsArray.forEach(card => {
+    let cardElement = document.querySelector(`#${suit}${card}`);
+    if (cardElement) {
+      cardElement.style.pointerEvents = '';
+    }
+  });
+}
+
+function teleport(cardElement, suit) {
+  if (suit === "clubs") {
+    spadeBattle = cardElement;
+    disableCardClicks('clubs');
+  } else {
+    clubsBattle = cardElement;
+    disableCardClicks('spades');
+  }
+
+  cardElement.remove();
+  document.querySelector(`.battle-${suit}`).appendChild(cardElement);
+}
+
+
+function clearBattle() {
+
+  console.log('removes')
+  spadeBattle.remove();
+  clubsBattle.remove();
+
+  console.log('enabling clicks')
+  enableCardClicks('spades');
+  enableCardClicks('clubs');
+  console.log('click enabled')
+}
+
+
+function sendNumber(suit, card) {
+
+
+
+  if (suit === "clubs") {
+    clubNumber = card
+  }
+  else {
+    spadeNumber = card
+  }
+
+  console.log(clubNumber)
+  console.log(spadeNumber)
+
+
+  endTurn(clubNumber, spadeNumber)
 
 
 }
-
-// jeigu padedu korta, nuimti event listerius nuo visu likusiu padetos kortos suit, o kai pabaigiu rounda prideti is naujo visus listenerius
 
 
 
@@ -110,49 +158,6 @@ resetButton()
 let spadeBattle
 let clubsBattle
 
-function teleport(cardElement, suit) {
-
-
-  if (suit === "clubs") {
-    spadeBattle = cardElement
-  }
-  else {
-    clubsBattle = cardElement
-  }
-
-
-  cardElement.remove()
-  document.querySelector(`.battle-${suit}`).appendChild(cardElement);
-
-
-
-}
-
-
-
-
-function sendNumber(suit, card) {
-
-
-
-
-  if (suit === "clubs") {
-    clubNumber = card
-  }
-  else {
-    spadeNumber = card
-  }
-
-  console.log(clubNumber)
-  console.log(spadeNumber)
-
-
-  endTurn(clubNumber, spadeNumber)
-
-
-}
-
-
 
 function endTurn(clubNumber, spadeNumber) {
 
@@ -179,7 +184,6 @@ function endTurn(clubNumber, spadeNumber) {
 let turnIndex = 1;
 let spadeScore = 0;
 let clubScore = 0;
-
 
 
 function countScore() {
@@ -212,7 +216,6 @@ function countScore() {
 
   }
 
-
   spadeNumber = 0
   clubNumber = 0
   resetButton()
@@ -223,26 +226,13 @@ function countScore() {
   clearBattle()
 
   turnIndex += 1
-
-
-
-
 }
-
 
 
 function deleteDiamond(card) {
 
   cardElement = document.querySelector(`#diamond${card}`)
   cardElement.remove()
-
-}
-
-function clearBattle() {
-
-  spadeBattle.remove()
-  clubsBattle.remove()
-
 
 }
 
